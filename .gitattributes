@@ -1,0 +1,27 @@
+# Force LF for all text/code files
+*.js       text eol=lf
+*.css      text eol=lf
+*.html     text eol=lf
+*.json     text eol=lf
+*.md       text eol=lf
+
+# Images and other binaries – Git should not change them
+*.png      binary
+*.jpg      binary
+*.jpeg     binary
+*.gif      binary
+*.svg      binary
+*.ico      binary
+*.webp     binary
+
+# Fonts
+*.woff     binary
+*.woff2    binary
+*.ttf      binary
+*.eot      binary
+
+# Optional: ignore any other binary formats you might add
+*.pdf      binary
+*.zip      binary
+*.mp3      binary
+*.mp4      binary

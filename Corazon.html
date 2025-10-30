@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lluvia de Corazones bonitos</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: radial-gradient(circle at center, #ffe6f0, #ff99c8, #ff66a3);
+      height: 100vh;
+    }
+
+    .heart {
+      position: absolute;
+      top: -120px;
+      opacity: 0;
+      animation: fallHeart linear forwards;
+      pointer-events: none;
+      object-fit: cover;
+      -webkit-mask-image: url('img/heart-mask.svg');
+      -webkit-mask-size: cover;
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      mask-image: url('img/heart-mask.svg');
+      mask-size: cover;
+      mask-repeat: no-repeat;
+      mask-position: center;
+      filter: drop-shadow(0 0 10px #ff66a3) drop-shadow(0 0 20px #ff1493);
+      transform-style: preserve-3d;
+      animation-timing-function: ease-in-out;
+    }
+
+    .message {
+      position: absolute;
+      top: -50px;
+      font-family: 'Arial', sans-serif;
+      font-weight: bold;
+      color: #fff;
+      text-shadow: 0 0 5px #ff1493, 0 0 10px #ff66a3;
+      opacity: 0;
+      animation: fallMessage linear forwards;
+      pointer-events: none;
+      transform-style: preserve-3d;
+      animation-timing-function: ease-in-out;
+    }
+
+    @keyframes fallHeart {
+      0% {
+        transform: translateY(0) translateX(0px) rotate(0deg) scale(1);
+        opacity: 0;
+        filter: drop-shadow(0 0 10px #ff66a3) drop-shadow(0 0 20px #ff1493);
+      }
+      10% { opacity: 1; }
+      25% {
+        transform: translateY(25vh) translateX(20px) rotate(45deg) scale(1.1);
+      }
+      50% {
+        transform: translateY(50vh) translateX(-15px) rotate(90deg) scale(1.2);
+      }
+      75% {
+        transform: translateY(75vh) translateX(10px) rotate(135deg) scale(1.1);
+      }
+      100% {
+        transform: translateY(110vh) translateX(0px) rotate(360deg) scale(1);
+        opacity: 0;
+      }
+    }
+
+    @keyframes fallMessage {
+      0% {
+        transform: translateY(0) translateX(0px) rotate(0deg) scale(1);
+        opacity: 0;
+      }
+      10% { opacity: 1; }
+      25% {
+        transform: translateY(25vh) translateX(15px) rotate(10deg) scale(1.05);
+      }
+      50% {
+        transform: translateY(50vh) translateX(-15px) rotate(-10deg) scale(1.1);
+      }
+      75% {
+        transform: translateY(75vh) translateX(10px) rotate(5deg) scale(1.05);
+      }
+      100% {
+        transform: translateY(110vh) translateX(0px) rotate(0deg) scale(1);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <script>
+    const heartImages = [
+      'img/corazon.jpg',
+      'img/corazon1.jpg',
+      'img/corazon2.jpg',
+      'img/corazon3.jpg',
+      'img/corazon4.jpg',
+    ];
+
+    const messages = [
+      "Te amo 💖",
+      "Eres mi todo 💞",
+      "MI Gordis hermosa 💕",
+      "Mi corazón es tuyo 💓",
+      "Te Amito Mucho 💘",
+      "Eres mi felicidad 💗",
+      "Mi tiernita linda 💗"
+    ];
+
+    let toggle = true; // Para alternar entre corazón y mensaje
+
+    function createElement() {
+      if (toggle) {
+        createHeart();
+      } else {
+        createMessage();
+      }
+      toggle = !toggle; // alterna la siguiente vez
+    }
+
+    function createHeart() {
+      const heart = document.createElement("img");
+      heart.classList.add("heart");
+
+      const randomImg = heartImages[Math.floor(Math.random() * heartImages.length)];
+      heart.src = randomImg;
+
+      heart.style.left = Math.random() * 100 + "vw";
+      const size = Math.random() * 60 + 60; // 60px a 120px
+      heart.style.width = `${size}px`;
+      heart.style.height = `${size}px`;
+
+      const duration = Math.random() * 4 + 3; // 3s a 7s
+      heart.style.animationDuration = `${duration}s`;
+
+      heart.style.transform = `rotate(${Math.random() * 360}deg)`;
+
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), duration * 1000);
+    }
+
+    function createMessage() {
+      const message = document.createElement("div");
+      message.classList.add("message");
+
+      const randomText = messages[Math.floor(Math.random() * messages.length)];
+      message.textContent = randomText;
+
+      message.style.left = Math.random() * 90 + "vw";
+      const fontSize = Math.random() * 14 + 16; // 16px a 30px
+      message.style.fontSize = `${fontSize}px`;
+
+      const duration = Math.random() * 4 + 3; // 3s a 7s
+      message.style.animationDuration = `${duration}s`;
+
+      message.style.transform = `rotate(${Math.random() * 20 - 10}deg)`;
+
+      document.body.appendChild(message);
+      setTimeout(() => message.remove(), duration * 1000);
+    }
+
+    // Alterna la creación de elementos cada 200ms
+    setInterval(createElement, 200);
+  </script>
+</body>
+</html>
